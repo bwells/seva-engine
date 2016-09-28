@@ -1,0 +1,137 @@
+<div style="margin-bottom: 15px;">
+    <label for="start">Start Value</label>
+    <input id="start"/>
+</div>
+
+<div>
+    <div>
+        <input id="1" class="node"></input>
+        <input id="2" class="node"></input>
+        <input id="3" class="node"></input>
+        <input id="4" class="node"></input>
+        <input id="5" class="node"></input>
+    </div>
+    <div>
+        <input id="6" class="node"></input>
+        <input id="7" class="node"></input>
+        <input id="8" class="node"></input>
+        <input id="9" class="node"></input>
+        <input id="10" class="node"></input>
+    </div>
+    <div>
+        <input id="11" class="node"></input>
+        <input id="12" class="node"></input>
+        <input id="13" class="node"></input>
+        <input id="14" class="node"></input>
+        <input id="15" class="node"></input>
+    </div>
+    <div>
+        <input id="16" class="node"></input>
+        <input id="17" class="node"></input>
+        <input id="18" class="node"></input>
+        <input id="19" class="node"></input>
+        <input id="20" class="node"></input>
+    </div>
+    <div>
+        <input id="21" class="node"></input>
+        <input id="22" class="node"></input>
+        <input id="23" class="node"></input>
+        <input id="24" class="node"></input>
+        <input id="25" class="node"></input>
+    </div>
+</div>
+
+<div>
+    <button type="button" id="run" onclick="onClick()">Run</button>
+</div>
+
+<script>
+
+    var button = document.getElementById('run');
+
+    // var value1 = document.getElementById(1);
+    // var value2 = document.getElementById(2);
+    // var value3 = document.getElementById(3);
+    // var value4 = document.getElementById(4);
+    // var value5 = document.getElementById(5);
+    // var value6 = document.getElementById(6);
+    // var value7 = document.getElementById(7);
+    // var value8 = document.getElementById(8);
+    // var value9 = document.getElementById(9);
+    // var value10 = document.getElementById(10);
+    // var value11 = document.getElementById(11);
+    // var value12 = document.getElementById(12);
+    // var value13 = document.getElementById(13);
+    // var value14 = document.getElementById(14);
+    // var value15 = document.getElementById(15);
+    // var value16 = document.getElementById(16);
+    // var value17 = document.getElementById(17);
+    // var value18 = document.getElementById(18);
+    // var value19 = document.getElementById(19);
+    // var value20 = document.getElementById(20);
+    // var value21 = document.getElementById(21);
+    // var value22 = document.getElementById(22);
+    // var value23 = document.getElementById(23);
+    // var value24 = document.getElementById(24);
+    // var value25 = document.getElementById(25);
+
+    var target = 65;
+    var nodes = document.getElementsByClassName('node');
+
+    function findPath() {
+        var start = parseInt(document.getElementById('start').value);
+        var total;
+
+        var row0 = [parseInt(nodes[0].value || 0), parseInt(nodes[1].value || 0), parseInt(nodes[2].value || 0), parseInt(nodes[3].value || 0), parseInt(nodes[4].value || 0)];
+        var row1 = [parseInt(nodes[5].value || 0), parseInt(nodes[6].value || 0), parseInt(nodes[7].value || 0), parseInt(nodes[8].value || 0), parseInt(nodes[9].value || 0)];
+        var row2 = [parseInt(nodes[10].value || 0), parseInt(nodes[11].value || 0), parseInt(nodes[12].value || 0), parseInt(nodes[13].value || 0), parseInt(nodes[14].value || 0)];
+        var row3 = [parseInt(nodes[15].value || 0), parseInt(nodes[16].value || 0), parseInt(nodes[17].value || 0), parseInt(nodes[18].value || 0), parseInt(nodes[19].value || 0)];
+        var row4 = [parseInt(nodes[20].value || 0), parseInt(nodes[21].value || 0), parseInt(nodes[22].value || 0), parseInt(nodes[23].value || 0), parseInt(nodes[24].value || 0)];
+
+        for (var col0=0; col0<5; col0++) {
+            for (var col1=0; col1<5; col1++) {
+                for (var col2=0; col2<5; col2++) {
+                    for (var col3=0; col3<5; col3++) {
+                        for (var col4=0; col4<5; col4++) {
+                            var selected = row0[col0] + row1[col1] + row2[col2] + row3[col3] + row4[col4];
+                            total = start + selected;
+                            if (total == target) {
+                                console.log('found it!')
+                                return [col0, col1, col2, col3, col4];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        console.log('failure');
+        return []
+    }
+
+    function onClick() {
+        var path = findPath();
+
+        for (var i=0; i<nodes.length; i++) {
+            nodes[i].style.borderColor = "";
+        }
+
+        if (path.length > 0) {
+            nodes[path[0]].style.borderColor = "red";
+            nodes[path[1]+5].style.borderColor = "red";
+            nodes[path[2]+10].style.borderColor = "red";
+            nodes[path[3]+15].style.borderColor = "red";
+            nodes[path[4]+20].style.borderColor = "red";
+        }
+    }
+
+</script>
+
+<style>
+
+    .selectedNode {
+        border: 1px solid red;
+    }
+
+</style>
+
